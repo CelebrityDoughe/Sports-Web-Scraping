@@ -1,0 +1,31 @@
+{% extends "page.html" %}
+
+{% block content %}
+<h4>{{ object.get_category_display }} for Team {{ schedule.team }} match at {{ schedule.date }}</h4>
+
+{% for table in object.data_json %}
+<table class="table table-hover table-bordered table-striped">
+    <thead>
+        <tr>
+            <th colspan="{{ table.body.0|length }}">{{ table.title }}</th>
+        </tr>
+        {% for head in table.head %}
+        <tr>
+            {% for th in head %}
+            <th colspan="{{ th.colspan }}">{{ th.title }}</th>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </thead>
+    <tbody>
+        {% for tr in table.body %}
+        <tr>
+            {% for td in tr %}
+            <td>{{ td }}</td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endfor %}
+{% endblock %}

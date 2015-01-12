@@ -1,0 +1,18 @@
+{% extends "page.html" %}
+
+{% block content %}
+<table class="table table-hover table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Team Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for obj in object_list %}
+        <tr>
+            <td><a href="{% url 'schedules:list' %}?team_id={{ obj.id }}">{{ obj }}</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

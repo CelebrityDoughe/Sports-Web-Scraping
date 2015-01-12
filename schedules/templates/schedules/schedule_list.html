@@ -1,0 +1,43 @@
+{% extends "page.html" %}
+
+{% block content %}
+<h4>Schedules for Team {{ team }}</h4>
+<table class="table table-hover table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Opponent</th>
+            <th>Location</th>
+            <th>Result</th>
+            <th>Score</th>
+            <th>Opponent Score</th>
+            <th>Score Result</th>
+            <th>Status</th>
+            <th>Stats</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for obj in object_list %}
+        <tr>
+            <td>{{ obj.date }}</td>
+            <td><a href={% url "schedules:list" %}?team_id={{ obj.opponent.id }}>{{ obj.opponent }}</td>
+            <td>{{ obj.get_location_display }}</td>
+            <td>{{ obj.result }}</td>
+            <td>{{ obj.score|default_if_none:"" }}</td>
+            <td>{{ obj.opponent_score|default_if_none:"" }}</td>
+            <td>{{ obj.score_result|default_if_none:"" }}</td>
+            <td>{{ obj.get_status_display }}</td>
+            <td>
+                <a href="{% url 'stats:detail' %}?schedule_id={{ obj.id }}&category=stats">Matchup Stats</a> /
+                <a href="{% url 'stats:detail' %}?schedule_id={{ obj.id }}&category=efficiency">Efficiency Stats</a> /
+                <a href="{% url 'stats:detail' %}?schedule_id={{ obj.id }}&category=splits">Stat Splits</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="9">No schedule</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
