@@ -17,7 +17,7 @@ NEWSPIDER_MODULE = 'rankingspider.spiders'
 MYSQL_USERNAME = ''
 MYSQL_PASSWORD = ''
 MYSQL_DB_NAME = ''  # default charset should be utf-8
-MYSQL_DB_HOST = 'locahost'
+MYSQL_DB_HOST = '127.0.0.1'
 MYSQL_DB_PORT = '3306'
 
 ITEM_PIPELINES = [
